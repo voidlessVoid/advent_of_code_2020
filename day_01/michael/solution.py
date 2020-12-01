@@ -23,7 +23,13 @@ def read_input_text():
 
 
 def part_a():
-    pass
+    numbers = [int(x) for x in read_input_lines()]
+    a,b  = [(x,y) for x in numbers for y in numbers if (x + y) == 2020][0]
+    print(a * b)
 
 def part_b():
-    pass
+    numbers = [int(x) for x in read_input_lines()]
+    a, b, c = [(x, y, z) for x in numbers for y in numbers  for z in numbers if (x + y + z) == 2020][0]
+    print(a * b * c)
+
+part_b()
