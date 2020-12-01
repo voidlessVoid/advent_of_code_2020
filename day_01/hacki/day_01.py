@@ -4,7 +4,7 @@
 # combinations
 import itertools as it
 import numpy as np
-from misc_hacki import misc
+from ...misc_hacki import misc
 
 in_ls = misc.load_input_to_list(misc.path_to_dir('puzzle_input'))
 
@@ -32,7 +32,7 @@ combination_ls = comb(
 
 def generate_sum(ls_input, sum_to_reach):
     # returns the combination, sum of combination and multiplication
-    # np.prod is the product of all elements in list
+    # np.prod is the product of all elements in tuple
     global it_sum
     sum_list = [
         [
