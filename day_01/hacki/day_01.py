@@ -33,7 +33,7 @@ combination_ls = comb(
 def generate_sum(ls_input, sum_to_reach):
     # returns the combination, sum of combination and multiplication
     # np.prod is the product of all elements in tuple
-    global it_sum
+
     sum_list = [
         [
             i,

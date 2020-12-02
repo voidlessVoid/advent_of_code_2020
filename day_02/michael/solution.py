@@ -23,7 +23,24 @@ def read_input_text():
 
 
 def part_a():
-    pass
+
+    def check_line(line):
+        rule, password = [x.strip() for x in line.split(":")]
+        freq, char = rule.split()
+        minfreq, maxfreq = [int(x) for x in freq.split("-")]
+        return minfreq <= password.count(char) <= maxfreq
+
+    print(sum([check_line(x) for x in read_input_lines()]))
+
 
 def part_b():
-    pass
+    def check_line(line):
+        rule, password = [x.strip() for x in line.split(":")]
+        freq, char = rule.split()
+        ixes = [int(x) - 1 for x in freq.split("-")]
+        return "".join([password[ix] for ix in ixes]).count(char) == 1
+
+    print(sum([check_line(x) for x in read_input_lines()]))
+
+part_a()
+part_b()
