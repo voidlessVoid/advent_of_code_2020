@@ -17,34 +17,12 @@ def split_ls(txt, seps):
     ]
 
 
-def split_and_define(
-        input,
-        first_level,
-        second_level
-):
-    policy_pw_ls = [
-        split_ls(
-            i,
-            seps=first_level
-        ) for i in input
-    ]
-    policy_pw_df = pd.DataFrame(
-        policy_pw_ls,
-        columns=[
-            'req',
-            'character',
-            'pw'
-        ]
-    )
-    policy_pw_df['req'] = policy_pw_df['req'].apply(
-        split_ls,
-        seps=second_level
-    )
+def split_and_define(input, first_level, second_level):
+    policy_pw_ls = [split_ls(i, seps=first_level) for i in input]
+    policy_pw_df = pd.DataFrame(policy_pw_ls, columns=['req', 'character', 'pw'])
+    policy_pw_df['req'] = policy_pw_df['req'].apply(split_ls, seps=second_level)
 
-    policy_pw_df['character'] = policy_pw_df['character'].str.split(
-        ':',
-        expand=True
-    )
+    policy_pw_df['character'] = policy_pw_df['character'].str.split(':', expand=True)
 
     req_df = policy_pw_df['req'].apply(pd.Series).astype(int)
     req_df.columns = ['min', 'max']
@@ -59,14 +37,9 @@ def split_and_define(
 def check_validity(df):
     ind_ls = []
 
-    for char, pw in zip(
-            df['character'],
-            df['pw']
-    ):
+    for char, pw in zip(df['character'], df['pw']):
         try:
-            ind_ls.append(
-                [i + 1 for i, x in enumerate(pw) if x == char]
-            )
+            ind_ls.append([i + 1 for i, x in enumerate(pw) if x == char])
         except:
             pass
 
@@ -75,11 +48,7 @@ def check_validity(df):
     valid_ls_c = []
     valid_ls_p = []
 
-    for c_min, c_max, indices in zip(
-            df['min'],
-            df['max'],
-            df['indices']
-    ):
+    for c_min, c_max, indices in zip(df['min'], df['max'], df['indices']):
         if len(indices) >= c_min:
             if len(indices) <= c_max:
                 valid_ls_c.append(True)
@@ -88,11 +57,7 @@ def check_validity(df):
         else:
             valid_ls_c.append(False)
 
-    for pos_1, pos_2, indices in zip(
-            df['min'],
-            df['max'],
-            df['indices']
-    ):
+    for pos_1, pos_2, indices in zip(df['min'], df['max'], df['indices']):
         set_list_1 = [{pos_1, pos_2}, set(indices)]
         set_list_2 = set_list_1[0] & set_list_1[1]
         if len(set_list_2) == 1:
