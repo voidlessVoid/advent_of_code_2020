@@ -10,7 +10,7 @@ data_list
         
 def check(data):
     for i in range(len(data)):
-        results = []
+        counter = 0
         for x in (data):
             lst = x.split()
             letter = lst[1].replace(":","")
@@ -19,12 +19,9 @@ def check(data):
             lower_bound = int(boundaries[0])
             upper_bound = int(boundaries[1])
             if count >=lower_bound and count <= upper_bound:
-                results.append(True)
-            else:
-                results.append(False)
-    print(len(results))
-    print(len(data))
-    print(results.count(True))
+                counter += 1
+            
+    print(counter)
     
 
 check(data_list)
@@ -32,7 +29,7 @@ check(data_list)
 
 def check2(data):
     for i in range(len(data)):
-        results = []
+        counter = 0
         for x in (data):
             lst = x.split()
             letter = lst[1].replace(":","")
@@ -43,12 +40,10 @@ def check2(data):
             pos_1 = int(boundaries[0])-1
             pos_2 = int(boundaries[1])-1
             if letter == password[pos_1] and letter != password[pos_2]:
-                results.append(True)
+                counter += 1
             if letter == password[pos_2] and letter != password[pos_1]:
-                results.append(True)
-            else:
-                results.append(False)            
-    print(results.count(True))
+                counter += 1           
+    print(counter)
     
     
 
