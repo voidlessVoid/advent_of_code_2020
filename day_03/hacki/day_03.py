@@ -5,7 +5,10 @@ in_ls = misc.load_input_to_list(
     misc.path_to_dir('puzzle_input')
 )
 
-toboggan_slope = {'right': [1,3,5,7,1], 'down': [1,1,1,1,2]}
+toboggan_slope = {
+    'right': [1,3,5,7,1],
+    'down': [1,1,1,1,2]
+}
 
 
 def slide (
