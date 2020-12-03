@@ -23,7 +23,18 @@ def read_input_text():
 
 
 def part_a():
-    pass
+    lines = read_input_lines()
+    height, width = len(lines), len(lines[0])
+    print(sum([lines[row][(row*3)%width] == '#' for row in range(height)]))
 
 def part_b():
-    pass
+    lines = read_input_lines()
+    height, width = len(lines), len(lines[0])
+    ans = 1
+    for drow, dcol in [(1,1),(1,3),(1,5),(1,7),(2,1)]:
+        ans *= sum([lines[step * drow][(step * dcol)%width] == '#' for step in range(0,((height-1)//drow)+1)])
+
+    print(ans)
+    
+part_a()
+part_b()
