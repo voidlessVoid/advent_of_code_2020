@@ -9,9 +9,12 @@ from copy import deepcopy
 from collections import Counter, ChainMap, defaultdict, deque
 from itertools import cycle
 from functools import reduce
-
+import time
 CURRENT_DIRECTORY = os.path.dirname(__file__)
 os.chdir(CURRENT_DIRECTORY)
+
+start = time.time()
+
 
 def read_input_lines():
     with open('input.txt', 'r') as fh:
@@ -44,3 +47,6 @@ part_a(df)
 part_b(df)
 #answerA 437931
 #answerB 157667328
+
+end = time.time()-start
+print('end',end)
