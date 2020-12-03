@@ -47,10 +47,17 @@ def split_and_define(
     )
 
     req_df = policy_pw_df['req'].apply(pd.Series).astype(int)
-    req_df.columns = ['min', 'max']
+    req_df.columns = [
+        'min',
+        'max'
+    ]
 
-    pw_ls = list(policy_pw_df['pw'].str.split(''))
-    pw_ls = [list(filter(None, i)) for i in pw_ls]
+    pw_ls = list(
+        policy_pw_df['pw'].str.split('')
+    )
+    pw_ls = [
+        list(filter(None, i)) for i in pw_ls]
+
     policy_pw_df['pw'] = pw_ls
 
     return policy_pw_df.join(req_df).drop(columns=['req'])
@@ -125,4 +132,4 @@ valid_df = check_validity(pw_df)
 part_1 = valid_df.loc[valid_df['valid_c'] == True]
 part_2 = valid_df.loc[valid_df['valid_p'] == True]
 
-print(part_1, part_2)
+print(part_2)

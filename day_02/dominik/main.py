@@ -25,7 +25,7 @@ def validate_pass2(in_list):
     counter = 0
     for value in in_list:
         policy = pw_pattern.search(value)
-        case1 = re.search((re.compile(rf"^.{{{int(policy.group(1)) - 1}}}[{policy.group(3)}]")), policy.group(4))
+        case1 = re.search((re.compile(rf'^.{{{int(policy.group(1)) - 1}}}[{policy.group(3)}]')), policy.group(4))
         case2 = re.search((re.compile(rf"^.{{{int(policy.group(2)) - 1}}}[{policy.group(3)}]")), policy.group(4))
 
         if case1 and case2 is None:
