@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 __author__ = "redTribune"
-__version__ = "0.1"
+__version__ = "1.0"
 __license__ = "MIT"
 
 # This code was created for the 'Advent Of Code' advent challenge 2020. Please feel free to use or modify it.
