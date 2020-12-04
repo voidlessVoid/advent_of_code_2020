@@ -75,9 +75,6 @@ if __name__=="__main__":
     for field in pssprt:
         entry = field.split(":")
         inp[idx][entry[0]] = entry[1]
-        
-    if len(inp[idx]) == 0: del inp[idx]
-    
 
     result1 = checkVal(inp)
     result2 = checkVal2(inp)
