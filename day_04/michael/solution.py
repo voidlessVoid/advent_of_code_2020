@@ -36,7 +36,7 @@ def part_b():
 
     validations = {
         "byr": lambda x: (len(x) == 4) and ("1920" <= x <= "2002"),
-        "iyr": lambda x: (len(x) == 4) and ("1910" <= x <= "2020"),
+        "iyr": lambda x: (len(x) == 4) and ("2010" <= x <= "2020"),
         "eyr": lambda x: (len(x) == 4) and ("2020" <= x <= "2030"),
         "hgt": lambda x: bool(validateHeight(x)),
         "hcl": lambda x: bool(re.match(r"^#[0-9a-f]{6}$", x)),
@@ -50,14 +50,5 @@ def part_b():
     records = read_input_text().split("\n\n")
     print(sum([validate(x) for x in records]))
 
-
 part_a()
 part_b()
-
-"""
-debugcode:
-    
-    for record in records:
-        if validate(record):
-            v = {field: value for field, value in [x.split(":") for x in record.split()]}["hcl"]
-            print(v)"""
