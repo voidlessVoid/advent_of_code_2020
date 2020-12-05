@@ -5,6 +5,9 @@ from itertools import groupby, zip_longest
 
 
 def load_input(file):
+    """
+    the re.split creates the bug with the input files, the last empty line of the document has in influence, but I don't know why at the moment
+    """
     with open(file, 'r') as f:
         in_str = f.read()
     return re.split(r"[\s,\n]", in_str)
