@@ -49,27 +49,23 @@ def eval(code, rows, col, limit=None):
     seat = seats[1]
     return [int(line), int(seat)]
              
-
 if __name__=="__main__":
     plane = list()
     with open("input.txt") as getInp:
         for line in getInp: plane.append(line.strip())
     
-    limit = 0               
-    for pssngr in plane:
-        val = eval(pssngr, 127, 7, limit=limit)
-        if val != None: limit = val[0] * 8 + val[1]
-    
+    pssngrID = list()               
     planeMap = np.array([])
     for idx in range(128): planeMap = np.concatenate((planeMap, np.arange(8)), axis=0)
      
     planeMap = planeMap.reshape(128,8) 
-        
+       
     for pssngr in plane:
         val = eval(pssngr, 127, 7)
-        if planeMap[val[0]][val[1]] == -1: print(val, pssngr)
-        planeMap[val[0]][val[1]] = -1
-
+        pssngrID.append(val[0] * 8 + val[1])
+        planeMap[val[0],val[1]] = -1
+    
+    maxID = np.max(pssngrID)
     mySeat = np.where(planeMap != -1)  
     mySeatLine = mySeat[0]
     seatID = list()
@@ -81,5 +77,5 @@ if __name__=="__main__":
             mySeatID = seatID[idx]
             break
     
-    result = "Answer 1: " + str(limit) + "\tAnswer 2: " + str(mySeatID)
+    result = "Answer 1: " + str(maxID) + "\tAnswer 2: " + str(mySeatID)
     print("Answer Code: %s" % (result))
