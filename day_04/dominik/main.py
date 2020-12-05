@@ -1,7 +1,7 @@
 in_file = "input.txt"
 
 import re
-from itertools import groupby, zip_longest
+from itertools import groupby
 
 
 def load_input(file):
@@ -38,14 +38,16 @@ def validate_passport(pass_list):
     val2_counter = 0
 
     for k, v in passport_dict.items():
-        if re.match("^(19[2-8][0-9]|199[0-9]|200[0-2]$)", v["byr"]):
-            if re.match("^(201[0-9]|2020)$", v["iyr"]):
-                if re.match("^(202[0-9]|2030)$", v["eyr"]):
-                    if re.match("(1[5-8][0-9]|19[0-3])cm", v["hgt"]) or re.match("(59|6[0-9]|7[0-6])in", v["hgt"]):
-                        if re.match("^#[a-zA-Z0-9]{6}$", v["hcl"]):
-                            if v["ecl"] in ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]:
-                                if re.match("\d{9}", v["pid"]):
-                                    val2_counter += 1
+        condition = [re.match("^(19[2-8][0-9]|199[0-9]|200[0-2]$)", v["byr"]),
+                     re.match("^(201[0-9]|2020)$", v["iyr"]),
+                     re.match("^(202[0-9]|2030)$", v["eyr"]),
+                     re.match("(1[5-8][0-9]|19[0-3])cm", v["hgt"]) or re.match("(59|6[0-9]|7[0-6])in", v["hgt"]),
+                     re.match("^#[a-zA-Z0-9]{6}$", v["hcl"]),
+                     v["ecl"] in ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"],
+                     re.match("\d{9}", v["pid"])]
+
+        if all(condition[n] for n in range(len(condition))):
+            val2_counter += 1
 
     return val1_counter, val2_counter
 
