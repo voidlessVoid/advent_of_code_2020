@@ -29,6 +29,7 @@ def slide (
 
         tree_line = geology[i]
         if tree_index > (len(tree_line)-1):
+            # this will not work if tree_index + horizontal >= 2 * len(tree_line)
             tree_index -= (len(tree_line))
         if tree_line[tree_index] == '#':
             tree_count += 1
