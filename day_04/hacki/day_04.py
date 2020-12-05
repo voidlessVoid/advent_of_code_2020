@@ -109,8 +109,6 @@ passport_db = create_and_return_sql(
 )
 
 
-
-
 def count_valid(db_name):
 
     ecl_ls = (
