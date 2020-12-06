@@ -28,9 +28,8 @@ def slide (
     for i in v_down:
 
         tree_line = geology[i]
-        if tree_index > (len(tree_line)-1):
-            tree_index -= (len(tree_line))
-        if tree_line[tree_index] == '#':
+
+        if tree_line[tree_index % len(tree_line)] == '#': # thanks for the module hint Gerrit!!!
             tree_count += 1
         tree_index += horizontal
 
