@@ -11,3 +11,12 @@ def load_input_to_list(path):
             content = [str(x.strip()) for x in content]
 
     return content
+
+def load_input_paragraphs(path):
+    with open(path) as file:
+        lines = file.read()
+        paragraphs = [paragraph.split(' ') for paragraph in lines.split("\n\n")]
+
+        return paragraphs
+
+
