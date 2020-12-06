@@ -1,7 +1,7 @@
 
 
-f_name = 'test_puzzle'
-#f_name = 'puzzle_input'
+#f_name = 'test_puzzle'
+f_name = 'puzzle_input'
 
 
 def load_input_paragraphs(path):
@@ -22,7 +22,6 @@ part_a = 0
 part_b = 0
 for i in in_ls:
     part_a += len(unionize(i))
-    i = [list(j) for j in i]
     part_b += len(intersect(i))
 
 print(part_a, part_b)
