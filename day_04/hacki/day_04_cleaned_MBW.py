@@ -52,7 +52,6 @@ def check_passport(key_list, d_ls_in):
         if list(d_set) == key_list:
             first_order_valid_passports.append(d)
 
-
     return first_order_valid_passports
 
 f_name = 'puzzle_input'
@@ -145,5 +144,7 @@ def count_valid(db_name):
 
     return filtered_db
 
+
 x = count_valid(db_name = f_name)
+conn.close()
 print(x)

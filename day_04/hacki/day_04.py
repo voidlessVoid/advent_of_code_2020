@@ -137,16 +137,18 @@ def count_valid(db_name):
               (hgt like '%in') and (cast(substr(hgt,1,length(hgt) - 2) as int) BETWEEN 59 and 76)
               )
             )
+
         AND hcl regexp '(^#[a-f0-9]{{6}}$)'
         AND ecl in {str(ecl_ls)}
         AND pid regexp '^\d{{9}}$'
     """
 
     filtered_db = pd.read_sql_query(query, conn)
-
+    conn.close()
     return filtered_db
 
 pd.set_option('display.max_rows', None)
 
 x = count_valid(db_name = f_name)
+
 print(x)
