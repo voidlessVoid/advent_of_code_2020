@@ -2,8 +2,8 @@ def input():
     with open('input_04.txt', 'r') as file:
         return file.read().strip()
 list_of_passports = input().split("\n\n")
-
-def part_a():
+new_list_filtered = []
+def count_valids():
     counter = 0
     
     byr = "byr"
@@ -22,13 +22,16 @@ def part_a():
                         if hcl in x:
                             if ecl in x:
                                 if pid in x:
+                                    new_list_filtered.append(x)
                                     counter += 1
     print(counter)
 
 
 
-part_a()
+count_valids()
 
+
+#print(list_of_passports[:2])
 
 import re
 def part_b():
@@ -60,42 +63,42 @@ def part_b():
                                     pid_position = x.find(pid)
                                     pass_id_start = x[pid_position+4:]
                                     pass_id = pass_id_start[:9]
-                                    length = sum(c.isdigit() for c in pass_id)
-                                    if length == 9:                                                    
-                                        if ecl in x:
-                                            colors = ["amb","blu","brn","gry","grn","hzl","oth"]
-                                            ecl_position = x.find(ecl)
-                                            eye_color_start = x[ecl_position+4:]
-                                            eye_color = eye_color_start[:3]
-                                            if eye_color in colors:
-                                                if hcl in x:
-                                                    hcl_position = x.find(hcl)
-                                                    hair_color_start = x[hcl_position+4:]
-                                                    hair_color = hair_color_start[:7]
-                                                    hcl_validation = bool(re.match(r"^#[0-9a-f]{6}$", hair_color))
-                                                    if hcl_validation == True:
-                                                        if hgt in x:
-                                                            inch = "in"
-                                                            cm = "cm"
-                                                            hgt_position = x.find(hgt)
-                                                            height_start = x[hgt_position+4:]
-                                                            height_var = (height_start[:3])
-                                                            if inch in height_start:
-                                                                height_var_inch = int(height_var[:-1])
-                                                                if height_var_inch >= 59 and height_var_inch <= 76:
-                                                                    counter_2+=1
-                                                                    #print(x)            
-                                                            if cm in x:
-                                                                try:
-                                                                    if int(height_var) >= 150 and int(height_var) <=193:
-                                                                        counter_2 += 1
-                                                                        #print(x)
-                                                                except ValueError:
-                                                                    print(height_var)
-                                                                    continue
+                                    if sum(n.isdigit() for n in pass_id_start[:10]) == 9:
+                                        length = sum(c.isdigit() for c in pass_id)
+                                        if length == 9:                                                    
+                                            if ecl in x:
+                                                colors = ["amb","blu","brn","gry","grn","hzl","oth"]
+                                                ecl_position = x.find(ecl)
+                                                eye_color_start = x[ecl_position+4:]
+                                                eye_color = eye_color_start[:3]
+                                                if eye_color in colors:
+                                                    if hcl in x:
+                                                        hcl_position = x.find(hcl)
+                                                        hair_color_start = x[hcl_position+4:]
+                                                        hair_color = hair_color_start[:7]
+                                                        hcl_validation = bool(re.match(r"^#[0-9a-f]{6}$", hair_color))
+                                                        if hcl_validation == True:
+                                                            if hgt in x:
+                                                                inch = "in"
+                                                                cm = "cm"
+                                                                hgt_position = x.find(hgt)
+                                                                height_start = x[hgt_position+4:]
+                                                                height_var = (height_start[:3])
+                                                                if inch in height_start:
+                                                                    height_var_inch = int(height_var[:-1])
+                                                                    if height_var_inch >= 59 and height_var_inch <= 76:
+                                                                        counter_2+=1            
+                                                                if cm in height_start: 
+                                                                    if len(re.findall('\\d',height_var)) == 3:
+                                                                    #print(height_var)\n"
+                                                                        if int(height_var) >= 150 and int(height_var) <=193:
+                                                                            counter_2 += 1
+                                                            
                                     
-    print(counter_2)
+    print("valid passports",counter_2)
 
                                       
 
 part_b()
+            
+        

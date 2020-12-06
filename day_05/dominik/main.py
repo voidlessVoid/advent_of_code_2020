@@ -1,5 +1,3 @@
-import re
-
 in_file = "input.txt"
 
 
