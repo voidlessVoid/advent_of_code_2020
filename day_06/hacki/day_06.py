@@ -3,7 +3,6 @@
 #f_name = 'test_puzzle'
 f_name = 'puzzle_input'
 
-
 def load_input_paragraphs(path):
     with open(path) as file:
         lines = file.read()
@@ -12,18 +11,19 @@ def load_input_paragraphs(path):
         ]
         return paragraphs
 
-in_ls = load_input_paragraphs(f_name)
-
 def unionize(ls):
     return set().union(*ls)
 
 def intersect(ls):
     return set(ls[0]).intersection(*ls)
 
-part_a, part_b = 0, 0
+if __name__ == '__main__':
 
-for i in in_ls:
-    part_a += len(unionize(i))
-    part_b += len(intersect(i))
+    in_ls = load_input_paragraphs(f_name)
+    part_a, part_b = 0, 0
 
-print(part_a, part_b)
+    for i in in_ls:
+        part_a += len(unionize(i))
+        part_b += len(intersect(i))
+
+    print(part_a, part_b)
