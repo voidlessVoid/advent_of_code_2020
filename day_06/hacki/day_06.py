@@ -18,10 +18,14 @@ def unionize(ls):
 def intersect(ls):
     return set().intersection(*ls)
 
-count = 0
+part_a = 0
+part_b = 0
 for i in in_ls:
-    i = [list(j) for j in i]
+    part_a += len(unionize(i))
+    print(part_a)
+    print(unionize(i))
+    i = [set(list(j)) for j in i]
     print(i)
     x = set().intersection(*i)
-    print(x)
-    count += len(intersect(i))
+
+print(part_a)
