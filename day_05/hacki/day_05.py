@@ -2,6 +2,7 @@ from misc_hacki import misc
 import numpy as np
 import pandas as pd
 
+
 class BinSeating:
 
     def __init__(self,
@@ -20,19 +21,18 @@ class BinSeating:
 
         def bin_divide(char_ls, num, upper_half):
             b_pass_index = 0
-            seat_index = []
             seats_ls = np.arange(
                 start=0,
-                stop=num+1,
+                stop=num + 1,
                 step=1,
                 dtype=int
             ).tolist()
-            while b_pass_index <= len(char_ls)-1:
+            while b_pass_index <= len(char_ls) - 1:
                 seat_index = int(
                     np.ceil(
                         np.divide(
                             seats_ls.index(seats_ls[-1])
-                            ,2
+                            , 2
                         )
                     )
                 )
@@ -49,7 +49,6 @@ class BinSeating:
 
             return seats_ls
 
-
         row_num = bin_divide(
             char_ls=region,
             num=self.rows,
@@ -60,22 +59,23 @@ class BinSeating:
             num=self.cols,
             upper_half='R'
         )
-        seat = np.multiply(row_num, self.cols+1)+col_num
-
+        seat = np.multiply(row_num, self.cols + 1) + col_num
 
         return {
-            'row' : row_num[0],
-            'col' : col_num[0],
+            'row': row_num[0],
+            'col': col_num[0],
             'seat': seat[0]
         }
 
     def ID_ls(self):
 
-        return [self.seat_ID(b_pass=i) for i in self.b_pass_ls]
+        return [
+            self.seat_ID(b_pass=i) for i in self.b_pass_ls
+        ]
 
 
 f_name = 'puzzle_input'
-#f_name = 'test_puzzle'
+# f_name = 'test_puzzle'
 in_ls = misc.load_input_to_list(f_name)
 row_n = 127
 col_n = 7
@@ -85,36 +85,42 @@ seat_ID_ls = BinSeating(
     cols=col_n
 ).ID_ls()
 
+
 # noinspection PyTypeChecker
 def extract_seat_info(ID_ls, cols):
-
     cols += 1
     seat_ID_df = pd.DataFrame(ID_ls)
     seats = seat_ID_df['seat']
     plane_seats = np.arange(
-        start = cols, stop=max(seats)+1, step = 1)
+        start=cols, stop=max(seats) + 1, step=1)
     empty_seats = sorted(
-        set(plane_seats)-set(seats)
+        set(plane_seats) - set(seats)
     )
     missing_seats = []
     for i in empty_seats:
         j = 1
-        while (i-j)%cols != 0: # module
+        while (i - j) % cols != 0:  # module
             import random
             j = random.randint(0, 7)
-        missing_seats.append([int((i-j)/cols), j, i])
+        missing_seats.append([int((i - j) / cols), j, i])
 
     missing_seats_df = pd.DataFrame(
         missing_seats,
         columns=['row', 'col', 'seat']
     )
-    own_seat = missing_seats_df.query('row >10 and row <100')
-    all_seats = seat_ID_df.append(missing_seats_df)
+    own_seat = missing_seats_df.query(
+        'row >10 and row <100'
+    )
+    all_seats = seat_ID_df.append(
+        missing_seats_df
+    )
 
     return {
-        'empty_seats' : missing_seats_df,
-        'plane_seats' : all_seats.sort_values(by=['seat']),
-        'own_seat_ID' : own_seat['seat'],
+        'empty_seats': missing_seats_df,
+        'plane_seats': all_seats.sort_values(
+            by=['seat']
+        ),
+        'own_seat_ID': own_seat['seat'],
     }
 
 
@@ -126,4 +132,10 @@ seats = extract_seat_info(
 plane_seats = seats['plane_seats']
 own_seat_ID = seats['own_seat_ID'].values[0]
 
-print(own_seat_ID, plane_seats[plane_seats['seat'].between(own_seat_ID-1,own_seat_ID+1)])
+print(
+    own_seat_ID,
+    plane_seats[plane_seats['seat'].between(
+        own_seat_ID - 1,
+        own_seat_ID + 1)
+    ]
+)
