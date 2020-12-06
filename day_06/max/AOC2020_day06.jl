@@ -13,8 +13,8 @@ using StatsBase
 
 groups = String[]
 pssngrs = Int64[]
-oldln = ""
-idx = 0
+oldln = String("")
+idx = Int64(0)
 
 qst = open("input.txt") do file
 
@@ -37,8 +37,8 @@ push!(groups, oldln)
 push!(pssngrs, idx)
    
 y = Int64[]
-yall = 0
-cnt = 1
+yall = Int64(0)
+cnt = Int64(1)
 
 for ans in groups
 note = countmap(ans)
