@@ -17,29 +17,29 @@ def part_a():
 			if char in answer_ordered:
 				result +=1
 		result_list.append(result)
-	print(sum(result_list))
+	print("part a sum: ",sum(result_list))
 
 part_a()
 
 answers_astyle = []
 for answer in answers:
 	answer_ordered = answer.replace("\n","")
-	answers_a.append(answer_ordered)
+	answers_astyle.append(answer_ordered)
  
 answers_bstyle = []
 for answer in answers:
-	answers_b.append(answer.split("\n"))
-len_answers = len(answers_b)
+	answers_bstyle.append(answer.split("\n"))
+
 
 
 def part_b():
 	final_list= []
-	for i in range(len(answers_a)):
+	for i in range(len(answers_astyle)):
 		results = []
 		count = 0
 		for char in abc:
-			occ = answers_a[i].count(char)
-			if occ == len(answers_b[i]):
+			occ = answers_astyle[i].count(char)
+			if occ == len(answers_bstyle[i]):
 				count += 1
 				results.append(1)
 		each_sum = sum(results)
@@ -49,7 +49,3 @@ def part_b():
 	
 
 part_b()
-
-
-       
-
