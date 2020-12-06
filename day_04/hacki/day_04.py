@@ -5,6 +5,8 @@ import re
 
 
 
+
+
 def create_passport_keys(ls_in):
 
     passports = [
@@ -59,7 +61,7 @@ def check_passport(key_list, d_ls_in):
 f_name = 'puzzle_input'
 
 passport_ls = misc.load_input_paragraphs(f_name)
-
+util = misc.open_ngyu()
 passport_keys = create_passport_keys(
     ls_in=passport_ls
 )

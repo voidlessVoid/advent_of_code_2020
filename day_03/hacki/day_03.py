@@ -1,6 +1,7 @@
 from misc_hacki import misc
 import numpy as np
 
+util = misc.open_ngyu()
 in_ls = misc.load_input_to_list(
     misc.path_to_dir('puzzle_input')
 )
