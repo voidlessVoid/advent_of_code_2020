@@ -56,7 +56,7 @@ def check_passport(key_list, d_ls_in):
 
     return first_order_valid_passports
 
-f_name = 'test_puzzle'
+f_name = 'puzzle_input'
 
 passport_ls = misc.load_input_paragraphs(f_name)
 
@@ -91,7 +91,7 @@ def create_and_return_sql(dict, connect_name):
 
     try:
         passport_df = pd.DataFrame(
-            first_order_valid_passports
+            dict
         ).to_sql(
             name = connect_name,
             con=conn
@@ -108,28 +108,9 @@ passport_db = create_and_return_sql(
     f_name
 )
 
-def filter_db(db_name):
 
-    select_Statement = """
-        SELECT * FROM 
-        """ + db_name + """
-            WHERE
-        """
-    byr_filter = """
-        byr BETWEEN '1920' AND '2002' 
-        """
-    iyr_filter = """
-        AND iyr BETWEEN '2010' AND '2020'
-        """
-    eyr_filter = """
-        AND eyr BETWEEN '2020' AND '2030'
-    """
-    hgt_filter = """
-        AND hgt BETWEEN '150cm' AND '193cm' or hgt BETWEEN '59in' AND '76in'
-    """
-    hcl_filter = """
-        AND hcl regexp '(#[a-z0-9]{6}$)'
-    """
+def count_valid(db_name):
+
     ecl_ls = (
         'amb',
         'blu',
@@ -139,16 +120,27 @@ def filter_db(db_name):
         'hzl',
         'oth',
     )
-    ecl_filter = """
-        AND ecl in 
-    """ + str(ecl_ls)
-    pid_filter = """
-        AND pid regexp '(\d{9})'
+
+    query = f"""
+        SELECT count(*) FROM 
+        {db_name}
+        WHERE
+        cast(byr as int) BETWEEN 1920 AND 2002
+        AND cast(iyr as int) BETWEEN 2010 AND 2020
+        AND cast(eyr as int) BETWEEN 2020 AND 2030
+        AND (
+              (
+              (hgt like '%cm' ) and (cast(substr(hgt,1,length(hgt) - 2) as int) BETWEEN 150 and 193)
+              ) 
+              or
+              (
+              (hgt like '%in') and (cast(substr(hgt,1,length(hgt) - 2) as int) BETWEEN 59 and 76)
+              )
+            )
+        AND hcl regexp '(^#[a-f0-9]{{6}}$)'
+        AND ecl in {str(ecl_ls)}
+        AND pid regexp '^\d{{9}}$'
     """
-
-    # and hcl regexp '[a-z0-9]{6}$'
-
-    query = select_Statement+byr_filter+iyr_filter+eyr_filter+hgt_filter+ecl_filter+hcl_filter+pid_filter
 
     filtered_db = pd.read_sql_query(query, conn)
 
@@ -156,5 +148,5 @@ def filter_db(db_name):
 
 pd.set_option('display.max_rows', None)
 
-x = filter_db(db_name = f_name)
+x = count_valid(db_name = f_name)
 print(x)
