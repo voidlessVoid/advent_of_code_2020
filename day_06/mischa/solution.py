@@ -67,7 +67,6 @@ def part_a(inp):
 
 
 
-
 def part_b(inp):
     dict_of_groups = make_dict_set(inp)
     list_of_sets = []
