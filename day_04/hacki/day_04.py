@@ -5,6 +5,8 @@ import re
 
 
 
+
+
 def create_passport_keys(ls_in):
 
     passports = [
@@ -59,7 +61,7 @@ def check_passport(key_list, d_ls_in):
 f_name = 'puzzle_input'
 
 passport_ls = misc.load_input_paragraphs(f_name)
-
+util = misc.open_ngyu()
 passport_keys = create_passport_keys(
     ls_in=passport_ls
 )
@@ -137,16 +139,18 @@ def count_valid(db_name):
               (hgt like '%in') and (cast(substr(hgt,1,length(hgt) - 2) as int) BETWEEN 59 and 76)
               )
             )
+
         AND hcl regexp '(^#[a-f0-9]{{6}}$)'
         AND ecl in {str(ecl_ls)}
         AND pid regexp '^\d{{9}}$'
     """
 
     filtered_db = pd.read_sql_query(query, conn)
-
+    conn.close()
     return filtered_db
 
 pd.set_option('display.max_rows', None)
 
 x = count_valid(db_name = f_name)
+
 print(x)
