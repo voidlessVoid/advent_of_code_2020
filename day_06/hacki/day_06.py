@@ -2,7 +2,7 @@ from misc_hacki import misc
 
 #f_name = 'test_puzzle'
 f_name = 'puzzle_input'
-util = misc.open_ngyu()
+util = misc.open_nggyu()
 def load_input_paragraphs(path):
     with open(path) as file:
         lines = file.read()

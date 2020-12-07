@@ -7,7 +7,7 @@ import numpy as np
 from misc_hacki import misc
 
 in_ls = misc.load_input_to_list(misc.path_to_dir('puzzle_input'))
-util = misc.open_ngyu()
+util = misc.open_nggyu()
 # dummy input
 sum_to_reach = 2020
 
