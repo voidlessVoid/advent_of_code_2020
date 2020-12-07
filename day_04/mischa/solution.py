@@ -125,14 +125,16 @@ def part_b(inp,valid):
                     dict_of_pass[str(next_key)] = ([])
                     dict_of_pass[str(next_key)].append((temp_key,temp_value))
     valid_passes = 0
-
+    test_list=[]
     for x in dict_of_pass:
 
         if x in valid and check_if_valid2(dict_of_pass[x]) == True:
             valid_passes += 1
+            test_list.append(int(x))
 
 
     print('answerB: ',valid_passes)
+    print(test_list)
 
 valid_pass_list1 = part_a(data)
 part_b(data,valid_pass_list1)
