@@ -21,9 +21,48 @@ def read_input_text():
     with open('input.txt', 'r') as fh:
         return fh.read().strip()
 
+def parseInnerBag(bag):
+    words = [ w for w in bag.split(" ") if w]
+    return int(words[0]), " ".join(words[1:3])
+
+
+def parseLines(lines):
+    bag2content = {}
+    content2parents = defaultdict(list)
+    for line in lines:
+        outer, inner = line.split("contain")
+        outer = " ".join(outer.split(" ")[:2])
+        if inner.endswith("no other bags."):
+            bag2content[outer] = []
+        else:
+            bag2content[outer] = [parseInnerBag(x) for x in inner.split(",")]
+            for innerBag in bag2content[outer]:
+                content2parents[innerBag[1]].append(outer)
+
+    return bag2content, content2parents
 
 def part_a():
-    pass
+
+    def solve(currentBag, content2parents):
+        return (set(content2parents[currentBag]) |
+                set().union(*[solve(x, content2parents) for x in content2parents[currentBag]]))
+
+    lines = read_input_lines()
+    bag2content, content2parents = parseLines(lines)
+    print(len(solve("shiny gold", content2parents)))
+
+
 
 def part_b():
-    pass
+    def solve(currentBag, bag2content):
+        if not bag2content[currentBag]:
+            return 0
+        return sum([solve(bag,bag2content) * number + number for number, bag in bag2content[currentBag]])
+
+
+    lines = read_input_lines()
+    bag2content, content2parents = parseLines(lines)
+    print(solve("shiny gold", bag2content))
+
+part_a()
+part_b()
