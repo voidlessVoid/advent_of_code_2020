@@ -1,14 +1,13 @@
 # o7 CMDRS
 
 from misc_hacki import misc
-import pandas as pd
+
 from collections import ChainMap
 import numpy as np
 import re
 
-
-f_name = 'test_puzzle'
-#f_name = 'puzzle_input'
+#f_name = 'test_puzzle'
+f_name = 'puzzle_input'
 in_ls = misc.load_input_to_list(f_name)
 bag_to_find = "shinygold"
 
@@ -35,21 +34,42 @@ bags = [[re.sub(r"[ ]|[.]|bag.|bag|\d", '', j) for j in i] for i in bags]
 
 bag_dict = dict(zip(index_level_1,zip(bags, c_new)))
 
+def puzzle1():
+    parent_bags = ['shinygold']
+    def __color_update(in_color_list):
+        parent_bags = []
+        for color in in_color_list:
+            for k, v in bag_dict.items():
+                if color in v[0]:
+                    parent_bags.append(k)
+        return list(set(parent_bags))
 
-parent_bags = []
+    color_counter_list = []
+    while parent_bags:
+        parent_bags = __color_update(parent_bags)
+        color_counter_list += parent_bags
 
-for key in bag_dict.keys():
-    #print(key, bag_dict[key])
-    for col, con in zip(bag_dict[key][0],bag_dict[key][1]):
-        if col == bag_to_find:
-           parent_bags.append({key: con})
+    print(len(set(color_counter_list)))
 
-parent_bags = dict(ChainMap(*parent_bags))
-b_count = []
-for key in bag_dict.keys():
-    #print(key, bag_dict[key])
-    for co in zip(bag_dict[key][0]):
-        b_count.append(set(co)&set(parent_bags.keys()))
+def puzzle2():
 
-b_count = [b for b in b_count if b]
-print(b_count)
+    daughter_bags = [['shinygold',1,1]]
+
+    def __color_update(in_color_list):
+        counter = 0
+        daughter_bags_new = []
+        for color in in_color_list:
+            for k, l in zip(*bag_dict[color[0]]):
+                if k != "noother":
+                    daughter_bags_new.append([k,l,l*color[2]])
+                    counter+=l*color[2]
+        return daughter_bags_new, counter
+
+    counter=0
+    while daughter_bags:
+        daughter_bags,count = __color_update(daughter_bags)
+        counter+=count
+        print(daughter_bags,counter)
+if __name__ == '__main__':
+    puzzle1()
+    puzzle2()

@@ -115,7 +115,7 @@ def check_validity(df):
 in_ls = misc.load_input_to_list(
     misc.path_to_dir('puzzle_input')
 )
-util = misc.open_ngyu()
+util = misc.open_nggyu()
 special_characters = list(punctuation)  # list of special characters
 
 first_level_sep = [' ']  # separator of puzzle input ls

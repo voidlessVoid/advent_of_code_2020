@@ -20,6 +20,6 @@ def load_input_paragraphs(path):
         return paragraphs
 
 
-def open_ngyu(url = 'https://www.youtube.com/watch?v=oHg5SJYRHA0'):
+def open_nggyu(url ='https://www.youtube.com/watch?v=oHg5SJYRHA0'):
     import webbrowser
     return webbrowser.open(url)

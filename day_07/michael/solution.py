@@ -1,14 +1,5 @@
 import os
-import sys
-import pandas as pd
-import numpy as np
-import math
-import datetime
-import operator
-from copy import deepcopy
-from collections import Counter, ChainMap, defaultdict, deque
-from itertools import cycle
-from functools import reduce
+from collections import defaultdict
 
 CURRENT_DIRECTORY = os.path.dirname(__file__)
 os.chdir(CURRENT_DIRECTORY)
@@ -44,24 +35,22 @@ def parseLines(lines):
 def part_a():
 
     def solve(currentBag, content2parents):
-        return (set(content2parents[currentBag]) |
-                set().union(*[solve(x, content2parents) for x in content2parents[currentBag]]))
+        return set(content2parents[currentBag]).union(*[solve(x, content2parents) for x in content2parents[currentBag]])
 
     lines = read_input_lines()
-    bag2content, content2parents = parseLines(lines)
+    _, content2parents = parseLines(lines)
     print(len(solve("shiny gold", content2parents)))
 
 
-
 def part_b():
+
     def solve(currentBag, bag2content):
         if not bag2content[currentBag]:
             return 0
         return sum([solve(bag,bag2content) * number + number for number, bag in bag2content[currentBag]])
 
-
     lines = read_input_lines()
-    bag2content, content2parents = parseLines(lines)
+    bag2content, _ = parseLines(lines)
     print(solve("shiny gold", bag2content))
 
 part_a()
