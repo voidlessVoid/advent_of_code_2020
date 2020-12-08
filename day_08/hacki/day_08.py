@@ -62,8 +62,15 @@ def part_b(command_ls, input_ls):
 
     accumulator = 0
     execute_index = 0
+    execute_index_new = [0]
 
-    while execute_index < len(command_ls)-1:
+    while max(execute_index_new) < len(command_ls)-1:
+        execute_index_new.append(execute_index)
+        if execute_index > len(command_ls)-1:
+            break
+        elif execute_index == len(command_ls)-1:
+            print('hurra')
+            break
         i = random.randint(0, len(command_ls)-1)
         if command_ls[i] == 'nop':
             command_ls[i] = 'jmp'
@@ -72,14 +79,8 @@ def part_b(command_ls, input_ls):
         commands = [
             [i, j] for i, j in zip(command_list, command_input)
         ]
-        if execute_index > len(command_ls)-1:
-            break
-        elif execute_index == len(command_ls)-1:
-            print('hurra')
         script_ = script_run(acc=accumulator, ind=execute_index, cmds=commands)
         execute_index = script_['current_index']
-
-
 
 
     return
