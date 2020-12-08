@@ -45,7 +45,6 @@ def execute(commands):
             execute_index += 1
         if commands[execute_index][0] == 'jmp':
             execute_index += commands[execute_index][1]
-            print(execute_index)
 
     return count
 
