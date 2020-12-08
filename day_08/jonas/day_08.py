@@ -8,6 +8,10 @@ for x in boot:
 	a = x.split()
 	boot_sep.append(a)
 
+nop = "nop"
+acc = "acc"
+jmp = "jmp"
+
 position = 0
 accumulator = 0
 step = 0
