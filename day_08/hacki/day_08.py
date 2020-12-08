@@ -4,17 +4,17 @@ import re
 
 
 def script_run(acc, ind, cmds):
+    index_out = ind
     if cmds[ind][0] == 'nop':
-        ind += 1
+        index_out += 1
     if cmds[ind][0] == 'acc':
         acc += cmds[ind][1]
-        ind += 1
+        index_out += 1
     if cmds[ind][0] == 'jmp':
-        ind += cmds[ind][1]
-
+        index_out += cmds[ind][1]
     return {
         'accumulator': acc,
-        'current_index': ind,
+        'current_index': index_out,
     }
 
 
@@ -50,17 +50,18 @@ def part_a(f_name):
 
     return accumulator
 
-# f_name = 'puzzle_input'
+f_name = 'puzzle_input'
 
-f_name = 'test_puzzle'
+# f_name = 'test_puzzle'
 
-def part_b(f_name):
+def get_index(f_name):
     import random
 
     accumulator = 0
     execute_index = 0
 
     while True:
+
         in_ls = misc.load_input_to_list(f_name)
         in_ls = [
             i.split(r' ') for i in in_ls
@@ -71,37 +72,44 @@ def part_b(f_name):
         command_input = [
             int(re.sub(r'[+]', '', i[1])) for i in in_ls
         ]
+        indeces = []
+        for i, j in enumerate(command_list):
+            if j == 'jmp' or j == 'nop':
+                indeces.append(i)
 
-        ran = random.randint(0, len(command_list) - 1)
-        if execute_index > len(command_list) - 1:
-            break
-        elif execute_index == len(command_list) - 1:
-            print('hurra')
+        ran = random.randint(0, len(indeces)-1)
+        if execute_index > len(command_list)-1:
             break
 
-        if command_list[ran] == 'nop':
-            command_list[ran] = 'jmp'
-            print(ran, command_list[ran])
-        if command_list[ran] == 'jmp':
-            command_list[ran] = 'nop'
-            print(ran, command_list[ran])
+        if command_list[indeces[ran]] == 'nop':
+            command_list[indeces[ran]] = 'jmp'
+        if command_list[indeces[ran]] == 'jmp':
+            command_list[indeces[ran]] = 'nop'
+
+
+
+        #print(ran)
         commands = [
             [i, j] for i, j in zip(command_list, command_input)
         ]
+
         script_ = script_run(
                 acc=accumulator,
                 ind=execute_index,
                 cmds=commands
                 )
         execute_index = script_['current_index']
+        if execute_index == len(command_list)-1 :
 
-    return
+            print('hurra', indeces[ran], command_list)
+
+    return accumulator, command_list
 
 
 a = part_a(
     f_name
 )
-b = part_b(
+b = get_index(
     f_name
 )
 
