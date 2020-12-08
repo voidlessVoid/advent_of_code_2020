@@ -97,14 +97,12 @@ def part_2(data):
     original_program = list(read_program(data))
 
     for i in range(len(original_program)):
-
         ctx = run_with(**interpreter)(
             alter_program(original_program, i)
         )
 
         if ctx["pos"] == len(original_program):
             return ctx["state"]
-
 
     raise Error("no modification fixed the program")
 
