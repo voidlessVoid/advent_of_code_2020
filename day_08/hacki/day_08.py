@@ -86,8 +86,6 @@ def get_index(f_name):
         if command_list[indeces[ran]] == 'jmp':
             command_list[indeces[ran]] = 'nop'
 
-
-
         #print(ran)
         commands = [
             [i, j] for i, j in zip(command_list, command_input)
@@ -104,7 +102,6 @@ def get_index(f_name):
             print('hurra', indeces[ran], command_list)
 
     return accumulator, command_list
-
 
 a = part_a(
     f_name
