@@ -4,7 +4,6 @@ import re
 
 
 def script_run(acc, ind, cmds):
-
     if cmds[ind][0] == 'nop':
         ind += 1
     if cmds[ind][0] == 'acc':
@@ -61,8 +60,6 @@ def part_b(f_name):
     accumulator = 0
     execute_index = 0
 
-
-
     while True:
         in_ls = misc.load_input_to_list(f_name)
         in_ls = [
@@ -75,28 +72,27 @@ def part_b(f_name):
             int(re.sub(r'[+]', '', i[1])) for i in in_ls
         ]
 
-        i = random.randint(0, len(command_list) - 1)
-
+        ran = random.randint(0, len(command_list) - 1)
         if execute_index > len(command_list) - 1:
             break
         elif execute_index == len(command_list) - 1:
             print('hurra')
             break
-        else:
-            if command_list[i] == 'nop':
-                command_list[i] = 'jmp'
-            if command_list[i] == 'jmp':
-                command_list[i] = 'nop'
 
+        if command_list[ran] == 'nop':
+            command_list[ran] = 'jmp'
+            print(ran, command_list[ran])
+        if command_list[ran] == 'jmp':
+            command_list[ran] = 'nop'
+            print(ran, command_list[ran])
         commands = [
             [i, j] for i, j in zip(command_list, command_input)
         ]
-
         script_ = script_run(
                 acc=accumulator,
                 ind=execute_index,
                 cmds=commands
-            )
+                )
         execute_index = script_['current_index']
 
     return
