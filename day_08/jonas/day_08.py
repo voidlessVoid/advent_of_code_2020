@@ -8,7 +8,6 @@ for x in boot:
 	a = x.split()
 	boot_sep.append(a)
 
-print(len(boot))
 
 nop = "nop"
 acc = "acc"
@@ -19,7 +18,7 @@ def part_a():
 
 	position = 0
 	accumulator = 0
-	step = 0
+	
 	tested_steps = []
 
 	 
@@ -28,18 +27,15 @@ def part_a():
 		if x[0] == nop:
 			tested_steps.append(position)
 			position += 1
-			step +=1
 			
 		if x[0] == acc :
 			accumulator += int(x[1])
 			tested_steps.append(position)
 			position +=1
-			step +=1
 			
 		if x[0] == jmp:
 			tested_steps.append(position)
 			position += int(x[1])
-			step +=1
 			
 	print("Accumulator", accumulator)
 	#print(tested_steps)
