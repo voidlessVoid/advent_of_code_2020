@@ -51,15 +51,14 @@ def part_b():
         while ix not in visited:
             if ix == len(lines):
                 print(acc)
-                return True
+                return
 
             visited.add(ix)
             op, num = lines[ix].split()
 
             if (not changedInstruction) and op in swaps:
                 ixSwap, accSwap = funcs[swaps[op]](num)
-                if solve(deepcopy(visited), ixSwap, accSwap, True):
-                    return
+                solve(deepcopy(visited), ixSwap, accSwap, True)
 
             ix, acc = funcs[op](num)
 
