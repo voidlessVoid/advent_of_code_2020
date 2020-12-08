@@ -72,3 +72,4 @@ def puzzle2():
 if __name__ == '__main__':
     puzzle1()
     puzzle2()
+    rule_dict = color_rules(read_input_lines())

@@ -1,8 +1,8 @@
 # o7 CMDRS
 
 from misc_hacki import misc
+util = misc.open_nggyu()
 
-from collections import ChainMap
 import numpy as np
 import re
 
