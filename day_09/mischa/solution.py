@@ -40,5 +40,6 @@ def part_a(inp):
 
 part_a(data)
 
+
 def part_b():
     pass
