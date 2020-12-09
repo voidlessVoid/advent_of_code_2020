@@ -15,16 +15,6 @@ def sum_comb(ls_input, comb_int):
         )
     ]
 
-def comb(ls_input, comb_int):
-    # return list comprehension with all combinations
-    return [
-            combination for combination in it.combinations(
-            ls_input,
-            comb_int
-        )
-    ]
-
-
 
 def part_a(
         in_ls,
@@ -32,8 +22,8 @@ def part_a(
         combinations
 ):
 
+    global break_number
     index = 0
-    break_number = 0
 
     while index+preamble <= len(in_ls)-1:
         ls = in_ls[
@@ -59,9 +49,9 @@ def part_b(
         invalid_n,
         combinations
 ):
+    global encryption_weakness_sum
     range_n = 2
     index = 0
-    encryption_w_ls = []
 
     while index+range_n <= len(in_ls)-1:
 
@@ -72,11 +62,9 @@ def part_b(
              index:(index + range_n)
              ]
         if sum(ls) == invalid_n:
-            #print(ls)
             encryption_weakness_sum = min(ls)+max(ls)
-            encryption_w_ls.append([min(ls), max(ls)])
         index +=1
-    return encryption_w_ls
+    return encryption_weakness_sum
 
 
 #f_name = 'test_puzzle'
@@ -99,5 +87,5 @@ encryption_weakness = part_b(
     combinations = combinations
 )
 
-print(sum(encryption_weakness[0]))
+print(encryption_weakness)
 
