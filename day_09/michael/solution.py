@@ -1,14 +1,4 @@
 import os
-import sys
-import pandas as pd
-import numpy as np
-import math
-import datetime
-import operator
-from copy import deepcopy
-from collections import Counter, ChainMap, defaultdict, deque
-from itertools import cycle
-from functools import reduce
 
 CURRENT_DIRECTORY = os.path.dirname(__file__)
 os.chdir(CURRENT_DIRECTORY)
@@ -23,7 +13,19 @@ def read_input_text():
 
 
 def part_a():
-    pass
+    def indexValid(i):
+        distinctPrevious = set(numbers[i-25:i])
+        return {(x+y) for x in distinctPrevious for y in distinctPrevious if (x+y == numbers[i]) and (x!= y)}
+
+    numbers = [int(i) for i in read_input_lines()]
+    print(numbers[next((i for i in range(25,len(numbers)) if not indexValid(i)))])
+
 
 def part_b():
-    pass
+    answer = 133015568
+    numbers = [int(i) for i in read_input_lines()]
+    validrange = next((numbers[a:b] for a in range(len(numbers)-1) for b in range(a+2,len(numbers)) if sum(numbers[a:b]) == answer))
+    print(min(validrange) + max(validrange))
+
+part_a()
+part_b()
