@@ -64,6 +64,7 @@ def part_b(
         if sum(ls) == invalid_n:
             encryption_weakness_sum = min(ls)+max(ls)
         index +=1
+
     return encryption_weakness_sum
 
 
