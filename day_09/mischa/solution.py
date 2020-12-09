@@ -34,12 +34,25 @@ def part_a(inp):
                 count+=1
                 break
         if count != 1:
-            print(act_num,inp[act_num])
-            return
+            print('answerA: ',inp[act_num])
+            return inp[act_num]
         act_num += 1
 
-part_a(data)
+A = part_a(data)
 
+def part_b(target,inp):
+    for idx,i in enumerate(inp):
+        curr = int(inp[idx])
+        count = idx+1
+        temp =[]
+        while curr < int(target):
+            curr+= int(inp[count])
+            if curr == int(target):
+                return print('answerB: ', min(temp) + max(temp))
+            temp.append(int(inp[count]))
+            count+=1
 
-def part_b():
-    pass
+part_b(A,data)
+
+#answerA:  26796446
+#answerB:  3353494
