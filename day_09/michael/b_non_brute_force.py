@@ -25,4 +25,3 @@ def part_b():
             fromIx += 1
 
 part_b()
-

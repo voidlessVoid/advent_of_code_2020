@@ -45,8 +45,6 @@ def part_a():
 def part_b():
 
     def solve(currentBag, bag2content):
-        if not bag2content[currentBag]:
-            return 0
         return sum([solve(bag,bag2content) * number + number for number, bag in bag2content[currentBag]])
 
     lines = read_input_lines()
