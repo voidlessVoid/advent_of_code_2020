@@ -1,6 +1,7 @@
 import os
 from collections import defaultdict
 
+
 CURRENT_DIRECTORY = os.path.dirname(__file__)
 os.chdir(CURRENT_DIRECTORY)
 
