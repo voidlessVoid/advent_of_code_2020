@@ -8,8 +8,8 @@ def puzzle1():
     layout=read_input_lines()
 
     def _bubble(seat_index, row_index, row, layout):
-        seat_range = [seat_index + x for x in [-1, 0, 1] if seat_index + x >= 0 and seat_index + x <= len(row)-1]
-        row_range = [row_index + x for x in [-1, 0, 1] if row_index + x >= 0 and row_index + x <= len(layout)-1]
+        seat_range = [seat_index + x for x in [-1, 0, 1] if seat_index + x >= 0 and seat_index + x < len(row)]
+        row_range = [row_index + x for x in [-1, 0, 1] if row_index + x >= 0 and row_index + x < len(layout)]
         bubble= {}
         for r in row_range:
             bubble[r]=seat_range
