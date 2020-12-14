@@ -50,7 +50,6 @@ class drunken_sailor:
         self.nav_dict[self.facing]()
 
     def __rotate(self):
-        v = 0
         d = {
             "N": 0,
             "E": 90,
@@ -111,7 +110,7 @@ class navigate_corretly:
                     self.wp = [self.wp[1], -1 * self.wp[0]]
             else:
                 for x in range(times):
-                    self.wp = [-1 * self.wp[1], self.wp[0]]  # anit-clockwise
+                    self.wp = [-1 * self.wp[1], self.wp[0]]
 
 
 def puzzle1():
