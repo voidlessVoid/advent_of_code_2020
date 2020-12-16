@@ -15,15 +15,26 @@ os.chdir(CURRENT_DIRECTORY)
 
 def read_input_lines():
     with open('input.txt', 'r') as fh:
-        return [x.strip() for x in fh.readlines()]
+        return [int(x.strip()) for x in fh.readlines()]
 
 def read_input_text():
     with open('input.txt', 'r') as fh:
         return fh.read().strip()
 
+data = read_input_lines()
 
-def part_a():
-    pass
+def part_a(inp):
+    a,b=[],[]
+    temp = sorted(inp)
+    for idx ,x in enumerate(temp):
+        if int(idx)<len(inp):
+            if temp[idx] - temp[idx - 1] == 1:
+                a.append(x)
+            if temp[idx] - temp[idx - 1] == 3:
+                b.append(x)
+    print((len(a)+1)*(len(b)+1))
+
+part_a(data)
 
 def part_b():
     pass
