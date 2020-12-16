@@ -30,4 +30,4 @@ def puzzle2(data, value):
 
 if __name__ == '__main__':
     puzzle1(data)
-    puzzle2(data, value=30000000)
+    #puzzle2(data, value=30000000)
