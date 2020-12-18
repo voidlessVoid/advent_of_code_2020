@@ -9,7 +9,9 @@ from util import prod
 real_data = list(read_lines(18))
 
 
-# Parsing
+# ------------------------------------
+# Shared
+
 
 whitespace = regex(r"\s*")
 
@@ -21,13 +23,12 @@ plus   = lexeme(string("+"))
 mult   = lexeme(string("*"))
 number = lexeme(regex(r"\d+").parsecmap(int))
 
-op = plus | mult
 
 # ------------------------------------
 # Part 1
 
 
-print("Part 1\n\n")
+op = plus | mult
 
 
 @generate
@@ -74,6 +75,7 @@ test_cases_1 = [
     [13632, "((2 + 4 * 9) * (6 + 9 * 8 + 6) + 6) + 2 + 4 * 2"]
 ]
 
+
 for expected, expr in test_cases_1:
     result = evaluate_1(expr)
     assert result == expected, f"\t{result} != {expected} in '{expr}'"
@@ -89,13 +91,11 @@ def part_1(data):
     )
 
 
-print(part_1(real_data))
+print("Part 1", part_1(real_data))
 
 
+# ------------------------------------
 # Part 2
-
-
-print("Part 2\n\n")
 
 
 @generate
@@ -134,7 +134,7 @@ def evaluate_2(line):
     return expression_2.parse(line)
 
 
-# Tests part 2
+# Tests
 
 
 test_cases_2 = [
@@ -150,6 +150,9 @@ test_cases_2 = [
 for expected, expr in test_cases_2:
     result = evaluate_2(expr)
     assert result == expected, f"\t{result} != {expected} in '{expr}'"
+
+
+# Ouput
 
 
 def part_2(data):
