@@ -36,6 +36,7 @@ def part_a():
     print("".join(input[index1+1:] + input[:index1]))
 
 part_a()
+
 def part_b():
 
     input = "469217538"
