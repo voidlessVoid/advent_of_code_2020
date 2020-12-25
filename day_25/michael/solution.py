@@ -21,9 +21,30 @@ def read_input_text():
     with open('input.txt', 'r') as fh:
         return fh.read().strip()
 
+publics = [12320657,9659666]
 
 def part_a():
-    pass
+    target = 12320657
+    value = 1
+    subject = 7
+    loopnr = 0
+    while value != target:
+        loopnr +=1
+        value *=subject
+        value %= 20201227
+
+    print(loopnr)
+    subject = 9659666
+    value = 1
+    for _ in range(loopnr):
+        value *= subject
+        value %= 20201227
+
+    print(value)
+
+    # too low
+
+part_a()
 
 def part_b():
     pass
